@@ -35,4 +35,4 @@ The backward pass was slower than the forward pass in all tests because it calcu
 
 The best model used a hidden width of 64 and a learning rate of 0.1. It achieved **93.89% test accuracy**.
 
-The lower learning rates did not learn much in 50 epochs. The gradient check passed the requirement, and the timing tests showed that the backward pass took longer than the forward pass.
+The lower learning rates did not learn much in 50 epochs. The gradient check passed the requirement, and the timing tests showed that the backward pass took longer than the forward pass.git status
