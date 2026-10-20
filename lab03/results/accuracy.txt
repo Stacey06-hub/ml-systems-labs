@@ -1,0 +1,11 @@
+Lab 3 - Fashion-MNIST Test Accuracy
+
+MLP: 86.47%
+CNN: 88.86%
+Attention: 83.71%
+
+Best model: CNN
+Training: 5 epochs
+Optimizer: Adam
+Learning rate: 0.001
+Batch size: 128

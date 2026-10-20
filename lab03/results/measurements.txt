@@ -1,0 +1,4 @@
+Model	Parameters	Approx. FLOPs	Batch 1 latency	Batch 128 latency
+MLP	235,146	469,504	0.087 ms	0.781 ms
+CNN	20,490	2,063,488	0.266 ms	27.918 ms
+Attention	70,794	101,632	0.373 ms	13.242 ms
