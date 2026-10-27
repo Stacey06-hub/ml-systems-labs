@@ -1,23 +1,39 @@
+
 import hashlib
+import os
+import pandas as pd
+import joblib
+
+from preprocess_data import OutlierClipper
+
 
 def main():
-    filename = "data/adult_raw.csv"
+    data = pd.read_csv("data/adult_raw.csv")
 
-    sha256 = hashlib.sha256()
+    X = data.drop(columns=["class"]).copy()
 
-    with open(filename, "rb") as file:
-        for chunk in iter(lambda: file.read(4096), b""):
-            sha256.update(chunk)
+    X["capital_net"] = X["capital-gain"] - X["capital-loss"]
+    X["hours_per_age"] = X["hours-per-week"] / (X["age"] + 16)
 
-    result = sha256.hexdigest()
+    preprocessor = joblib.load(
+        "lab04/results/preprocessor.joblib"
+    )
 
-    print("Dataset:", filename)
-    print("SHA256:", result)
+    processed = preprocessor.transform(X)
 
-    with open("lab04/results/dataset_hash.txt", "w") as file:
+    if hasattr(processed, "toarray"):
+        processed = processed.toarray()
+
+    result = hashlib.sha256(processed.tobytes()).hexdigest()
+
+    os.makedirs("lab04/results", exist_ok=True)
+
+    with open("lab04/results/processed_data_hash.txt", "w") as file:
         file.write(result + "\n")
 
+    print("Processed dataset SHA256:", result)
     print("Hash saved successfully!")
+
 
 if __name__ == "__main__":
     main()

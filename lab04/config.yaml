@@ -5,7 +5,7 @@ dataset:
   target: class
 
 split:
-  test_size: 0.2
+  test_size: 0.3
   random_state: 42
 
 preprocessing:
@@ -13,6 +13,14 @@ preprocessing:
   categorical_imputation: most_frequent
   categorical_encoding: onehot
   numeric_scaling: standard
+  outlier_clipping: true
+  outlier_lower_percentile: 1
+  outlier_upper_percentile: 99
+  remove_training_duplicates: true
+
+features:
+  - capital_net
+  - hours_per_age
 
 model:
   name: logistic_regression

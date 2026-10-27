@@ -6,7 +6,7 @@
 
 
 
-The goal of this lab was to prepare the Adult dataset and build a machine learning pipeline. I also checked data quality and tested model performance.
+The goal of this lab was to prepare the Adult dataset, check its quality, and build a machine learning pipeline to predict income.
 
 
 
@@ -18,15 +18,15 @@ I downloaded the Adult dataset from OpenML. It contains 48,842 rows and 15 colum
 
 
 
-I checked the column names, data types, missing values, duplicates, and numerical ranges. I split the data into training and test sets using an 80/20 split and random state 42.
+I checked column names, data types, missing values, duplicate rows, numerical ranges, and label quality. I split the data into 70% training data and 30% test data using random state 42.
 
 
 
-I filled missing numerical values with the median and missing categorical values with the most common value. I scaled numerical features and used one-hot encoding for categorical features.
+Missing numerical values were filled using the median, and missing categorical values were filled using the most frequent value. Numerical outliers were clipped using the 1st and 99th percentiles calculated from the training data. Exact duplicate rows were removed from the training data only.
 
 
 
-I trained a Logistic Regression model. I also added an age group feature and compared the results.
+I created two features: `capital\_net` (capital gain minus capital loss) and `hours\_per\_age` (hours per week divided by age minus 16). I trained a Logistic Regression model and compared it with a model without the new features.
 
 
 
@@ -38,29 +38,31 @@ I trained a Logistic Regression model. I also added an age group feature and com
 
 |---|---:|
 
-| Dataset rows | 48,842 |
+| Original dataset rows | 48,842 |
 
-| Dataset columns | 15 |
+| Original dataset columns | 15 |
 
-| Duplicate rows found | 52 |
+| Training rows before duplicate removal | 34,189 |
 
-| Missing income labels | 0 |
+| Training rows after duplicate removal | 34,165 |
 
-| Training rows | 39,073 |
+| Test rows | 14,653 |
 
-| Test rows | 9,769 |
+| Simple model accuracy | 85.40% |
 
-| Simple model accuracy | 85.24% |
+| Simple model F1 score for `>50K` | 66.01% |
 
-| Simple model F1 score | 65.62% |
+| Model with new features accuracy | 85.78% |
 
-| Model with age group accuracy | 85.42% |
-
-| Model with age group F1 score | 66.34% |
+| Model with new features F1 score for `>50K` | 66.96% |
 
 
 
-The dataset hash was saved in `lab04/results/dataset\_hash.txt`. I also saved a 50-row label audit.
+The preprocessing object and trained model were saved in the results folder. The processed dataset SHA-256 hash was also saved.
+
+
+
+The label audit found no missing income labels and identified five groups of identical feature values with conflicting labels. A sample of 50 rows was saved for inspection.
 
 
 
@@ -68,11 +70,11 @@ The dataset hash was saved in `lab04/results/dataset\_hash.txt`. I also saved a 
 
 
 
-1\. The dataset had missing values in three columns, but no missing income labels.
+1\. The dataset contains missing values and duplicate rows that require careful handling.
 
-2\. The model achieved 85.24% accuracy and an F1 score of 65.62% for the income group above $50K.
+2\. The model with the two new features performed slightly better than the simple model.
 
-3\. Adding the age group feature slightly improved accuracy and F1 score.
+3\. The model with new features achieved 85.78% accuracy and an F1 score of 66.96% for the `>50K` class.
 
 
 
@@ -80,7 +82,7 @@ The dataset hash was saved in `lab04/results/dataset\_hash.txt`. I also saved a 
 
 
 
-The income groups are not balanced. The model performed better on the <=50K group than on the >50K group. More testing is needed to understand the effect of data quality and other features.
+The dataset has more examples in the `<=50K` group than in the `>50K` group. The model performs better at identifying the `<=50K` class than the `>50K` class. Therefore, accuracy alone does not fully describe its performance.
 
 
 
