@@ -2,31 +2,59 @@
 
 
 
-\## 1. Dataset
+\## 1. Dataset Overview
 
 
 
-I used the Adult dataset from OpenML. It contains 48,842 rows and 15 columns. The goal is to predict a person's income group.
+The Adult dataset contains 48,842 rows and 15 columns. It is used to predict whether a person's annual income is above $50,000. The target column is `class`, with labels `<=50K` and `>50K`.
 
 
 
-\## 2. Data Quality
+\## 2. Source and License
 
 
 
-I checked column names, data types, missing values, duplicates, numerical ranges, and income labels. Missing values were found in `workclass` (2,799), `occupation` (2,809), and `native-country` (857). The original dataset contains 52 duplicate rows. There are no missing income labels.
+\- \*\*Source:\*\* Adult dataset accessed through OpenML.
+
+\- \*\*Dataset version:\*\* 2, as specified in the project configuration.
+
+\- \*\*Original source:\*\* UCI Adult dataset.
+
+\- \*\*License:\*\* The exact applicable license should be verified from the dataset's official metadata before redistribution.
 
 
 
-The label audit also found five groups of identical feature values with conflicting income labels.
+\## 3. Data Quality
 
 
 
-\## 3. Data Preparation
+I checked column names, data types, missing values, duplicate rows, numerical ranges, and income labels.
 
 
 
-I split the data into 70% training data and 30% test data using random state 42.
+Missing values were found in:
+
+\- `workclass`: 2,799
+
+\- `occupation`: 2,809
+
+\- `native-country`: 857
+
+
+
+The original dataset contains 52 duplicate rows. There are no missing income labels. The validation script also checks selected numerical ranges and reports invalid income labels.
+
+
+
+The label audit identified five groups of identical feature values with conflicting income labels. A sample of 50 rows was saved for inspection.
+
+
+
+\## 4. Data Preparation
+
+
+
+The data was split into 70% training data and 30% test data using random state 42.
 
 
 
@@ -34,15 +62,15 @@ Missing numerical values were filled using the median, and missing categorical v
 
 
 
-I used one-hot encoding for categorical features and standard scaling for numerical features. The preprocessing object was saved in `results/preprocessor.joblib`.
+Categorical features were encoded using one-hot encoding, and numerical features were standardized. The preprocessing object was saved in `results/preprocessor.joblib`.
 
 
 
-\## 4. Feature Engineering
+\## 5. Feature Engineering
 
 
 
-I created two new features:
+Two features were created:
 
 
 
@@ -52,11 +80,11 @@ I created two new features:
 
 
 
-\## 5. Model Results
+\## 6. Model Results
 
 
 
-I used Logistic Regression to predict income.
+Logistic Regression was used to predict income.
 
 
 
@@ -70,35 +98,53 @@ I used Logistic Regression to predict income.
 
 
 
-The model with the new features performed slightly better on both metrics.
+Adding the new features slightly improved both accuracy and F1 score.
 
 
 
-\## 6. Conclusion
+\## 7. Known Biases and Limitations
 
 
 
-Adding the two new features slightly improved the model results. The model performs better at predicting the `<=50K` income group than the `>50K` group.
+The dataset contains more examples of people earning `<=50K` than `>50K`. The model identifies the `<=50K` class more effectively than the `>50K` class. The dataset may also reflect historical and demographic biases. Conflicting labels for identical feature values may affect model reliability.
 
 
 
-\## 7. Reproducibility
+The model's predictions should not be treated as definitive judgments about individuals.
 
 
 
-The random state is 42, and the train/test split is 70/30. The trained model and preprocessing object were saved in the results folder. The processed dataset SHA-256 hash was saved in `results/processed\_data\_hash.txt`.
+\## 8. Privacy Considerations
 
 
 
-A 50-row sample for label auditing was saved in `results/label\_audit\_50.csv`.
+The dataset contains demographic and employment-related information. It should be handled responsibly and used for appropriate educational or analytical purposes. Model outputs should not be used as the sole basis for consequential decisions about individuals.
 
 
 
-\## 8. Limitations
+\## 9. Reproducibility and Artifacts
 
 
 
-The dataset has more examples in the `<=50K` group than in the `>50K` group. The data may also contain historical bias. The conflicting labels identified during the audit may limit prediction quality.
+\- Random state: `42`
+
+\- Train/test split: `70/30`
+
+\- Trained model: `results/adult\_model.joblib`
+
+\- Preprocessor: `results/preprocessor.joblib`
+
+\- Label audit sample: `results/label\_audit\_50.csv`
+
+\- Processed dataset hash: `results/processed\_data\_hash.txt`
+
+
+
+The pipeline can be run from the repository root using:
+
+
+
+` .venv\\Scripts\\python.exe lab04\\src\\run\_pipeline.py `
 
 
 
