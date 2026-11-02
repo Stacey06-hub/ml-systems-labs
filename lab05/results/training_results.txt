@@ -1,0 +1,13 @@
+Lab 5 make_moons training results
+NumPy median time: 0.01567570003680885
+NumPy test loss: 0.550222496586335
+NumPy test accuracy: 0.8166666666666667
+PyTorch median time: 0.07370830001309514
+PyTorch test loss: 0.5502224564552307
+PyTorch test accuracy: 0.8166666626930237
+Runs: 5
+Epochs: 100
+Architecture: 2 -> 8 -> 1
+Hidden activation: Sigmoid
+Output activation: Sigmoid
+Initialization: Shared Xavier-style weights
