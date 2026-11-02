@@ -1,0 +1,8 @@
+Eager median: 2.9950053431093693e-05
+Traced median: 2.4900014977902174e-05
+Non-contiguous median: 0.0001629000762477517
+Contiguous median: 0.00018214998999610543
+Tensor shape: torch.Size([1000, 1000])
+Tensor dtype: torch.float32
+Original contiguous: True
+Transposed contiguous: False
