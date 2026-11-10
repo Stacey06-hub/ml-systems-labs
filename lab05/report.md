@@ -1,8 +1,8 @@
-\# Lab 5 – Neural Networks, Automatic Differentiation and PyTorch Performance
+**Lab 5 – Neural Networks, Automatic Differentiation and PyTorch Performance**
 
 
 
-\## 1. Goal
+**1. Goal**
 
 
 
@@ -10,11 +10,11 @@ The goal of this lab was to understand how neural networks work internally. I ex
 
 
 
-\## 2. Method
+&#x20;**2. Method**
 
 
 
-\### Experiment 1: Building an Automatic Differentiation Engine
+&#x20;Experiment 1: Building an Automatic Differentiation Engine
 
 
 
@@ -22,7 +22,7 @@ I created a `Value` class in Python to store numerical values and their gradient
 
 
 
-\### Experiment 2: Checking Gradients
+&#x20;**Experiment 2: Checking Gradients**
 
 
 
@@ -30,7 +30,7 @@ I tested my automatic differentiation engine by comparing it with PyTorch autogr
 
 
 
-\### Experiment 3: PyTorch Execution and Tensor Performance
+&#x20;**Experiment 3: PyTorch Execution and Tensor Performance**
 
 
 
@@ -38,19 +38,17 @@ I created a small neural network and used `torch.jit.trace()` to generate a trac
 
 
 
-\### Experiment 4: NumPy vs PyTorch Training
+&#x20;**Experiment 4: NumPy vs PyTorch Training**
 
 
 
 I trained a small neural network using NumPy and PyTorch with the `make\_moons` dataset. Both networks had the same architecture, initial weights, and training settings. I trained each model for 100 epochs and repeated the experiment five times. I then compared training time, test loss, and accuracy.
 
-
-
-\## 3. Results
+&#x20;3. Results
 
 
 
-\### Experiment 1: Automatic Differentiation
+&#x20;**Experiment 1: Automatic Differentiation**
 
 
 
@@ -58,7 +56,7 @@ My `Value` class created a computation graph and calculated gradients using the 
 
 
 
-\### Experiment 2: Checking Gradients
+**Experiment 2: Checking Gradients**
 
 
 
@@ -66,7 +64,7 @@ The expected gradients were 42 for a, 28 for b, and 14 for c. The code compared 
 
 
 
-\### Experiment 3: PyTorch Execution and Tensor Performance
+&#x20;**Experiment 3: PyTorch Execution and Tensor Performance**
 
 
 
@@ -74,7 +72,7 @@ The eager execution time was 0.00004460 seconds, while the traced execution time
 
 
 
-\### Experiment 4: NumPy vs PyTorch Training
+&#x20;**Experiment 4: NumPy vs PyTorch Training**
 
 
 
@@ -82,7 +80,7 @@ NumPy had a median training time of 0.01568 seconds, while PyTorch took 0.07371 
 
 
 
-\## 4. Conclusion
+&#x20;**4. Conclusion**
 
 
 
