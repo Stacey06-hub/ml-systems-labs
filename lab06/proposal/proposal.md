@@ -1,176 +1,78 @@
-### **Individual Project Proposal**
+Individual Project Proposal
 
-##### 
+Smart Meal and Grocery Recommendation System
 
-##### **Waste Classification Using Deep Learning**
+Student Name: Stacey Mufaro Nyirenda
+Student ID: 73505
 
+1. Problem Statement
 
+Planning meals and deciding what groceries to buy can be difficult, especially when trying to save time, manage a budget and maintain a balanced diet.
 
-**Student Name: Stacey Mufaro Nyirenda**  
+This project aims to develop a machine learning-based system that recommends meals and grocery items based on users' food preferences, available ingredients and budget. It will also estimate calories and ingredient quantities to help users plan their meals.
 
-**Student ID: 73505**
+2. Dataset
 
+The project will explore datasets containing information such as:
 
+Food and recipe names.
 
-###### 1\. **Problem Statement**
+Ingredients and nutritional information.
 
+Grocery items and prices.
 
+Food categories.
 
-Waste management is an important environmental challenge. Incorrect disposal of waste makes recycling more difficult and contributes to environmental pollution.
+Serving sizes and user preferences.
 
+A suitable public dataset will be explored for training and testing the system.
 
+3. Proposed Approach
 
-This project proposes developing a deep learning model that can automatically classify waste images into different categories. The aim is to make waste sorting easier and support more efficient recycling.
+A machine learning model will be developed using Python and PyTorch.
 
+The system will analyse food preferences, available ingredients and budget information to recommend suitable meals and grocery items.
 
+It will also provide:
 
-###### 2\. Dataset
+Approximate calorie estimates for each meal.
 
+Ingredient quantities in grams based on the number of servings.
 
+Estimated nutritional information.
 
-The project will use the TrashNet dataset, which contains images belonging to six waste categories:
+Grocery lists showing the ingredients that need to be purchased.
 
+Meal suggestions that consider the user's budget and preferences.
 
+For example, a user could enter the ingredients they have at home and the number of people they are cooking for. The system would suggest meals, calculate approximate ingredient quantities and calories, and list any additional groceries needed.
 
-\- Cardboard
+4. Success Criteria
 
-\- Glass
+The proposed project targets are:
 
-\- Metal
+Metric                      Target
 
-\- Paper
+Recommendation accuracy     At least 85%
 
-\- Plastic
+Inference latency           50 ms or less
 
-\- Trash
+Model size                  5 MB or less
 
+Calorie estimates          Reasonable estimates based on recipe ingredients and quantities
+ 
+5. Model Optimisation
 
+The project will explore optimisation techniques such as:
 
-The images will be prepared and divided into training, validation and testing datasets.
+Pruning: Removing less important model weights or filters.
 
+Quantization: Reducing model precision to make it smaller and potentially faster.
 
+Knowledge distillation: Training a smaller model using knowledge from a larger model.
 
-###### **3. Proposed Model and Method**
+Different model versions will be compared based on recommendation performance, model size and inference latency.
 
+6. Expected Outcome
 
-
-A Convolutional Neural Network (CNN) will be developed using PyTorch.
-
-
-
-The model will learn visual features from waste images and predict the correct waste category.
-
-
-
-The project will involve:
-
-\- Loading and preprocessing the dataset.
-
-\- Building and training a CNN.
-
-\- Evaluating model performance.
-
-\- Applying model optimization techniques.
-
-\- Comparing the model before and after optimization.
-
-
-
-###### **4. Success Criteria**
-
-
-
-The following are the proposed project targets:
-
-
-
-| Metric | Target |
-
-|---|---|
-
-| Test accuracy | At least 85% |
-
-| Inference latency | 50 ms or less per image |
-
-| Model size | 5 MB or less |
-
-
-
-These are target values, not achieved results.
-
-
-
-###### **5. Model Optimization**
-
-
-
-The project plans to investigate:
-
-
-
-Pruning: Removing less important model weights to reduce model complexity.
-
-Quantization: Reducing numerical precision to make the model smaller and potentially faster.
-
-
-
-The optimized model will be evaluated against the original model to determine the effect on accuracy, model size and inference latency.
-
-
-
-###### **6. Initial Code Preview**
-
-
-
-The following is an initial example of the proposed CNN architecture:
-
-
-
-import torch.nn as nn
-
-
-
-model = nn.Sequential(
-
-&#x20;   nn.Conv2d(3, 16, kernel\_size=3, padding=1),
-
-&#x20;   nn.ReLU(),
-
-&#x20;   nn.MaxPool2d(2),
-
-
-
-&#x20;   nn.Conv2d(16, 32, kernel\_size=3, padding=1),
-
-&#x20;   nn.ReLU(),
-
-&#x20;   nn.MaxPool2d(2),
-
-
-
-&#x20;   nn.AdaptiveAvgPool2d((1, 1)),
-
-&#x20;   nn.Flatten(),
-
-&#x20;   nn.Linear(32, 6)
-
-)
-
-
-
-This is a preliminary architecture preview. The final model may be adjusted during implementation.
-
-
-
-###### **7. Expected Outcome**
-
-
-
-The expected outcome is a trained waste classification model that can identify six categories of waste from images.
-
-
-
-The project will also investigate whether pruning and quantization can reduce model size and inference latency while maintaining acceptable classification accuracy.
-
-
-
+The expected outcome is a simple intelligent system that helps users plan meals, estimate calories, calculate ingredient quantities and prepare grocery lists based on their preferences, available ingredients and budget. The final model should be efficient enough to run on ordinary computers while maintaining good recommendation performance.
