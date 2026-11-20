@@ -1,0 +1,10 @@
+Lab 6 - Training Profile
+
+Time breakdown for one training epoch
+
+data_loading: 29.9187 seconds (76.12%)
+forward: 4.3108 seconds (10.97%)
+backward: 4.1859 seconds (10.65%)
+optimizer: 0.8890 seconds (2.26%)
+
+Total measured time: 39.3044 seconds

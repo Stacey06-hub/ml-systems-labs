@@ -1,0 +1,11 @@
+Lab 6 - Optimizer and Scheduler Study
+
+Training budget: 10 epochs
+
+Optimizer | Scheduler | Test accuracy | Time (seconds)
+Adam | StepLR | 0.9015 | 268.63
+Adam | CosineAnnealingLR | 0.9032 | 306.45
+Adam | ReduceLROnPlateau | 0.8961 | 289.94
+SGD | StepLR | 0.8584 | 434.50
+SGD | CosineAnnealingLR | 0.8613 | 400.82
+SGD | ReduceLROnPlateau | 0.8710 | 419.61

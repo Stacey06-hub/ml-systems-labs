@@ -1,0 +1,8 @@
+Batch Size Study (5 epochs)
+Peak RAM is process RSS, measured in MB.
+
+Batch size: 32, Throughput: 2084.64 samples/s, Peak RAM: 478.78 MB, Test accuracy: 0.9050
+Batch size: 64, Throughput: 1938.40 samples/s, Peak RAM: 487.82 MB, Test accuracy: 0.8955
+Batch size: 128, Throughput: 2079.16 samples/s, Peak RAM: 497.54 MB, Test accuracy: 0.8897
+Batch size: 256, Throughput: 2311.53 samples/s, Peak RAM: 533.04 MB, Test accuracy: 0.8898
+Batch size: 512, Throughput: 1839.80 samples/s, Peak RAM: 581.93 MB, Test accuracy: 0.8760
