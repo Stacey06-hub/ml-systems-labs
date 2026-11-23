@@ -1,0 +1,16 @@
+Knowledge Distillation Results
+------------------------------
+Temperature: 4.0
+Alpha: 0.5
+Training epochs: 5
+
+Teacher parameters: 979,498
+Student parameters: 80,602
+
+Teacher accuracy: 92.44%
+Standalone student accuracy: 89.65%
+Distilled student accuracy: 89.44%
+
+Teacher size: 3.74 MB
+Standalone student size: 0.31 MB
+Distilled student size: 0.31 MB
