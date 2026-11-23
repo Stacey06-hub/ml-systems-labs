@@ -1,0 +1,5 @@
+Structured Pruning Results
+--------------------------
+Target filter pruning: 10% | Zero filters: 19/192 | Parameters: 979,498 | Parameters after masking: 979,498
+Target filter pruning: 25% | Zero filters: 48/192 | Parameters: 979,498 | Parameters after masking: 979,498
+Target filter pruning: 50% | Zero filters: 96/192 | Parameters: 979,498 | Parameters after masking: 979,498
