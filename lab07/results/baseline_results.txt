@@ -1,0 +1,13 @@
+Baseline CNN Results
+-------------------------
+Parameters: 979,498
+Test accuracy: 92.44%
+Model size: 3.74 MB
+Inference latency: 1.823 ms
+
+Training history:
+{'epoch': 1, 'loss': 0.44695479481719264, 'train_accuracy': 83.78, 'val_accuracy': 88.48}
+{'epoch': 2, 'loss': 0.2638891521234845, 'train_accuracy': 90.43636363636364, 'val_accuracy': 90.8}
+{'epoch': 3, 'loss': 0.20999826019586518, 'train_accuracy': 92.24727272727273, 'val_accuracy': 91.8}
+{'epoch': 4, 'loss': 0.17488427065139592, 'train_accuracy': 93.48727272727272, 'val_accuracy': 92.2}
+{'epoch': 5, 'loss': 0.14584581610248532, 'train_accuracy': 94.60727272727273, 'val_accuracy': 92.72}
