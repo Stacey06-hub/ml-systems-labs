@@ -1,0 +1,18 @@
+Magnitude Pruning and Fine-Tuning Results
+-----------------------------------------
+
+Method: global
+Target: 0% | Before fine-tuning: 0.00% | After fine-tuning: 0.00%
+Target: 25% | Before fine-tuning: 25.00% | After fine-tuning: 25.00%
+Target: 50% | Before fine-tuning: 50.00% | After fine-tuning: 50.00%
+Target: 75% | Before fine-tuning: 75.00% | After fine-tuning: 75.00%
+Target: 90% | Before fine-tuning: 90.00% | After fine-tuning: 90.00%
+Target: 95% | Before fine-tuning: 95.00% | After fine-tuning: 95.00%
+
+Method: per_layer
+Target: 0% | Before fine-tuning: 0.00% | After fine-tuning: 0.00%
+Target: 25% | Before fine-tuning: 25.00% | After fine-tuning: 25.00%
+Target: 50% | Before fine-tuning: 50.00% | After fine-tuning: 50.00%
+Target: 75% | Before fine-tuning: 75.00% | After fine-tuning: 75.00%
+Target: 90% | Before fine-tuning: 90.00% | After fine-tuning: 90.00%
+Target: 95% | Before fine-tuning: 95.00% | After fine-tuning: 95.00%
