@@ -124,23 +124,41 @@ Per-layer pruning performed better at high sparsity. At 95%, it achieved 84.78% 
 
 
 
-Structured pruning was tested at 10%, 25%, and 50%.
+Structured pruning was tested by removing filters from the convolutional layers and rebuilding smaller CNN models.
 
 
 
-| Target pruning | Zero filters |
-
-|---|---:|
-
-| 10% | 19 of 192 |
-
-| 25% | 48 of 192 |
-
-| 50% | 96 of 192 |
+Three pruning levels were tested: 10%, 25%, and 50%.
 
 
 
-The filters were masked but not physically removed. Therefore, the parameter count remained 979,498.
+Results:
+
+
+
+| Filter removal | Parameters | Model size | Test accuracy | Latency |
+
+|---|---:|---:|---:|---:|
+
+| Baseline | 979,498 | 3.74 MB | 92.44% | 0.866 ms |
+
+| 10% | 871,674 | 3.33 MB | 92.33% | 0.827 ms |
+
+| 25% | 721,330 | 2.76 MB | 91.85% | 0.507 ms |
+
+| 50% | 472,378 | 1.81 MB | 87.58% | 0.419 ms |
+
+
+
+The results show that physically removing filters reduced the number of parameters and model size.
+
+
+
+At 50% filter removal, the model had 51.77% fewer parameters than the baseline. Its test accuracy was 87.58%.
+
+
+
+The 25% model gave a good balance between compression and accuracy, achieving 91.85% test accuracy with a smaller model size of 2.76 MB.
 
 
 
@@ -232,45 +250,27 @@ The student model was much smaller than the teacher. However, distillation did n
 
 
 
-Data efficiency:
-
-The same Fashion-MNIST dataset and data loader were used for all models. This helped keep the experiments consistent.
+The experiments showed that model compression can reduce model size and the number of parameters while keeping useful classification accuracy.
 
 
 
-Model efficiency:
-
-The student model reduced the parameter count from 979,498 to 80,602 and the model size from 3.74 MB to 0.31 MB.
+Magnitude pruning showed that per-layer pruning performed better than global pruning at high sparsity levels. However, unstructured pruning did not reduce the saved model size or consistently improve inference speed because the CPU still processed the zero weights.
 
 
 
-Compute efficiency:
-
-All experiments were performed on CPU. Unstructured pruning did not consistently improve inference speed because the zero weights were still stored in dense tensors.
+Physical structured pruning gave better compression results because filters were actually removed from the model. The 25% filter removal model reduced the parameter count by 26.36% and achieved 91.85% test accuracy. The 50% model was smaller and faster, but its accuracy dropped to 87.58%.
 
 
 
-Energy efficiency:
-
-Direct energy consumption was not measured. The smaller student model may use fewer resources, but actual energy savings would need to be measured.
+Knowledge distillation produced a smaller student model with 80,602 parameters compared with 979,498 in the teacher model. The standalone student achieved 89.65% test accuracy, while the distilled student achieved 89.44%. Therefore, distillation did not improve accuracy in this experiment.
 
 
 
-Summary:
+The efficiency analysis considered data, model, compute, and energy. The smaller models reduced storage requirements. Physical structured pruning also reduced inference latency. Direct energy consumption was not measured because a reliable power measurement was not available.
 
 
 
-| Pillar | Finding |
-
-|---|---|
-
-| Data | Same dataset and data loader used |
-
-| Model | Student model was much smaller |
-
-| Compute | Sparse models did not show consistent speed improvements |
-
-| Energy | Direct measurements were not available |
+Overall, physical structured pruning and the compact student model showed useful ways to reduce model size. Future work could investigate better distillation settings and direct energy measurement.
 
 
 

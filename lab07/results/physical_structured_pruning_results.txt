@@ -1,0 +1,30 @@
+PHYSICAL STRUCTURED PRUNING RESULTS
+-----------------------------------
+Baseline parameters: 979498
+Baseline accuracy: 92.44%
+Baseline size: 3.74 MB
+Baseline latency: 0.866 ms
+
+Filter removal: 10%
+Remaining channels: (29, 58, 86)
+Parameters: 871674
+Parameter reduction: 11.01%
+Model size: 3.33 MB
+Test accuracy: 92.33%
+Inference latency: 0.827 ms
+
+Filter removal: 25%
+Remaining channels: (24, 48, 72)
+Parameters: 721330
+Parameter reduction: 26.36%
+Model size: 2.76 MB
+Test accuracy: 91.85%
+Inference latency: 0.507 ms
+
+Filter removal: 50%
+Remaining channels: (16, 32, 48)
+Parameters: 472378
+Parameter reduction: 51.77%
+Model size: 1.81 MB
+Test accuracy: 87.58%
+Inference latency: 0.419 ms
