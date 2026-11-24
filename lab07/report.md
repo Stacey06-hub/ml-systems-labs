@@ -6,11 +6,11 @@ Lab 7: Model Compression – Pruning and Knowledge Distillation
 
 
 
-The aim of this lab was to test model compression techniques and see how they affect model accuracy, size, and speed.
+The aim of this lab was to test model compression techniques and understand how they affect model accuracy, size, and inference speed.
 
 
 
-The experiments used Fashion-MNIST and covered baseline training, pruning, benchmarking, knowledge distillation, and efficiency analysis.
+The experiments covered baseline CNN training, magnitude pruning, structured pruning, dense and sparse benchmarking, knowledge distillation, and efficiency analysis.
 
 
 
@@ -22,11 +22,11 @@ The Fashion-MNIST dataset was divided into:
 
 
 
-\- Training: 55,000 images
+&#x20;Training: 55,000 images
 
-\- Validation: 5,000 images
+&#x20;Validation: 5,000 images
 
-\- Testing: 10,000 images
+&#x20;Testing: 10,000 images
 
 
 
@@ -38,11 +38,7 @@ A batch size of 128 was used. All experiments were performed on a CPU.
 
 
 
-An oversized CNN called OversizedCNN was trained for five epochs using Adam with a learning rate of 0.001.
-
-
-
-Results:
+An oversized CNN called `OversizedCNN` was trained for five epochs using Adam with a learning rate of 0.001.
 
 
 
@@ -60,7 +56,7 @@ Results:
 
 
 
-The baseline model achieved 92.44% test accuracy and was used for comparison with the compressed models.
+The baseline model was used as the reference for the compression experiments.
 
 
 
@@ -68,55 +64,29 @@ The baseline model achieved 92.44% test accuracy and was used for comparison wit
 
 
 
-Global and per-layer pruning were tested at 0%, 25%, 50%, 75%, 90%, and 95% sparsity. Each model was fine-tuned for three epochs.
+Global and per-layer pruning were tested at 0%, 25%, 50%, 75%, 90%, and 95% sparsity. Each model was fine-tuned for three epochs with pruning masks fixed.
 
 
 
-Global pruning results:
+| Sparsity | Global validation accuracy | Per-layer validation accuracy |
+
+|---|---:|---:|
+
+| 0% | 91.80% | 91.88% |
+
+| 25% | 91.52% | 90.74% |
+
+| 50% | 91.40% | 90.86% |
+
+| 75% | 91.12% | 89.38% |
+
+| 90% | 89.62% | 86.68% |
+
+| 95% | 8.90% | 84.78% |
 
 
 
-| Sparsity | Validation accuracy |
-
-|---|---:|
-
-| 0% | 91.80% |
-
-| 25% | 91.52% |
-
-| 50% | 91.40% |
-
-| 75% | 91.12% |
-
-| 90% | 89.62% |
-
-| 95% | 8.90% |
-
-
-
-Per-layer pruning results:
-
-
-
-| Sparsity | Validation accuracy |
-
-|---|---:|
-
-| 0% | 91.88% |
-
-| 25% | 90.74% |
-
-| 50% | 90.86% |
-
-| 75% | 89.38% |
-
-| 90% | 86.68% |
-
-| 95% | 84.78% |
-
-
-
-Per-layer pruning performed better at high sparsity. At 95%, it achieved 84.78% accuracy, while global pruning dropped to 8.90%.
+Per-layer pruning performed much better at 95% sparsity. Global pruning dropped to 8.90% validation accuracy, while per-layer pruning achieved 84.78%.
 
 
 
@@ -124,19 +94,11 @@ Per-layer pruning performed better at high sparsity. At 95%, it achieved 84.78% 
 
 
 
-Structured pruning was tested by removing filters from the convolutional layers and rebuilding smaller CNN models.
+Structured pruning was tested by removing filters from convolutional layers and rebuilding smaller CNN models.
 
 
 
-Three pruning levels were tested: 10%, 25%, and 50%.
-
-
-
-Results:
-
-
-
-| Filter removal | Parameters | Model size | Test accuracy | Latency |
+| Target filter removal | Parameters | Model size | Test accuracy | Latency |
 
 |---|---:|---:|---:|---:|
 
@@ -150,15 +112,7 @@ Results:
 
 
 
-The results show that physically removing filters reduced the number of parameters and model size.
-
-
-
-At 50% filter removal, the model had 51.77% fewer parameters than the baseline. Its test accuracy was 87.58%.
-
-
-
-The 25% model gave a good balance between compression and accuracy, achieving 91.85% test accuracy with a smaller model size of 2.76 MB.
+The filters were physically removed, creating smaller models. The 25% target removal model reduced the parameter count by 26.36% while maintaining 91.85% test accuracy. At 50% target removal, the model was smaller and faster, but accuracy dropped to 87.58%.
 
 
 
@@ -166,7 +120,7 @@ The 25% model gave a good balance between compression and accuracy, achieving 91
 
 
 
-The models were tested on CPU using batch size 1, 20 warm-up runs, and 200 timed runs.
+Models were tested on CPU using batch size 1, 20 warm-up runs, and 200 timed runs.
 
 
 
@@ -198,11 +152,11 @@ The models were tested on CPU using batch size 1, 20 warm-up runs, and 200 timed
 
 
 
-The results show that sparsity did not consistently improve inference speed or reduce model size. This is because zero weights were still stored and processed in dense tensors.
+Unstructured sparsity did not reduce model size or consistently improve inference speed. This happened because zero weights remained stored in dense tensors and were still processed by the CPU.
 
 
 
-The baseline training script measured 1.823 ms, while the separate benchmark measured 0.886 ms. The benchmark results above use the same measurement method for all compared models.
+The baseline training script measured 1.823 ms, while the separate benchmark measured 0.886 ms. The separate benchmark used the same timing method for all models in that comparison.
 
 
 
@@ -210,23 +164,7 @@ The baseline training script measured 1.823 ms, while the separate benchmark mea
 
 
 
-A large CNN was used as the teacher, and a smaller CNN was trained as the student.
-
-
-
-The distillation settings were:
-
-
-
-\- Temperature: 4
-
-\- Alpha: 0.5
-
-\- Training epochs: 5
-
-
-
-Results:
+A large CNN was used as the teacher and a smaller CNN as the student. The distillation temperature was 4, alpha was 0.5, and both student experiments were trained for five epochs.
 
 
 
@@ -242,7 +180,7 @@ Results:
 
 
 
-The student model was much smaller than the teacher. However, distillation did not improve accuracy. The standalone student performed slightly better.
+The student model was much smaller than the teacher. However, knowledge distillation did not improve accuracy in this experiment. The standalone student performed slightly better.
 
 
 
@@ -250,27 +188,21 @@ The student model was much smaller than the teacher. However, distillation did n
 
 
 
-The experiments showed that model compression can reduce model size and the number of parameters while keeping useful classification accuracy.
+The experiments considered four efficiency pillars:
 
 
 
-Magnitude pruning showed that per-layer pruning performed better than global pruning at high sparsity levels. However, unstructured pruning did not reduce the saved model size or consistently improve inference speed because the CPU still processed the zero weights.
+\- Data: The same Fashion-MNIST training, validation, and test splits were used for consistent comparisons.
+
+\- Model: The student model reduced the parameter count from 979,498 to 80,602 and model size from 3.74 MB to 0.31 MB.
+
+\- Compute: Physical structured pruning reduced inference latency. Unstructured sparsity did not consistently improve speed on dense CPU operations.
+
+\- Energy: Direct energy consumption in watts or joules was not measured because a reliable power measurement was unavailable.
 
 
 
-Physical structured pruning gave better compression results because filters were actually removed from the model. The 25% filter removal model reduced the parameter count by 26.36% and achieved 91.85% test accuracy. The 50% model was smaller and faster, but its accuracy dropped to 87.58%.
-
-
-
-Knowledge distillation produced a smaller student model with 80,602 parameters compared with 979,498 in the teacher model. The standalone student achieved 89.65% test accuracy, while the distilled student achieved 89.44%. Therefore, distillation did not improve accuracy in this experiment.
-
-
-
-The efficiency analysis considered data, model, compute, and energy. The smaller models reduced storage requirements. Physical structured pruning also reduced inference latency. Direct energy consumption was not measured because a reliable power measurement was not available.
-
-
-
-Overall, physical structured pruning and the compact student model showed useful ways to reduce model size. Future work could investigate better distillation settings and direct energy measurement.
+The results show that smaller models can reduce storage requirements and physical filter removal can improve inference efficiency. Actual energy savings would need to be measured separately.
 
 
 
@@ -278,17 +210,17 @@ Overall, physical structured pruning and the compact student model showed useful
 
 
 
-This lab showed that pruning and knowledge distillation can help reduce model size.
+This lab showed that pruning and knowledge distillation can reduce model size while maintaining useful classification accuracy.
 
 
 
-The baseline achieved 92.44% test accuracy. Per-layer pruning performed better than global pruning at high sparsity. However, unstructured pruning did not reduce model size or consistently improve speed.
+Per-layer pruning performed better than global pruning at high sparsity. Physical structured pruning reduced model size and inference latency, with the 25% target removal model achieving 91.85% test accuracy.
 
 
 
-The student model reduced the size from 3.74 MB to 0.31 MB while achieving 89.65% accuracy when trained alone.
+The compact student model reduced model size from 3.74 MB to 0.31 MB and achieved 89.65% test accuracy when trained alone. Knowledge distillation did not improve its accuracy in this experiment.
 
 
 
-Overall, the smaller student model gave the clearest reduction in model size. Further work could include physically removing filters and measuring actual energy consumption.
+Overall, physical structured pruning and the compact student model showed useful ways to reduce model size and computation. Direct energy consumption was not measured and remains a limitation of this experiment.
 
